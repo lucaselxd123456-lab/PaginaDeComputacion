@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Los Archivos Públicos (Lucas) ALL STARS!</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@500;700;800&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --sky-top: #0a6bbf;
+  --sky-mid: #1a8fe0;
+  --sky-low: #4ab8f0;
+  --sky-horizon: #a8dcf5;
+  --grass-dark: #2a8a1a;
+  --grass-mid: #3daa22;
+  --grass-light: #60cc3a;
+  --glass-white: rgba(255,255,255,0.55);
+  --glass-edge: rgba(255,255,255,0.85);
+  --glass-inner: rgba(200,235,255,0.35);
+  --chrome-light: #e8eef5;
+  --chrome-mid: #c5d0db;
+  --chrome-dark: #8a9fb5;
+  --chrome-shine: rgba(255,255,255,0.9);
+  --xp-blue: #245eab;
+  --xp-blue-light: #3d80d4;
+  --xp-titlebar: linear-gradient(180deg, #4d9cf0 0%, #1d5fba 8%, #1a56b0 40%, #1e62c0 88%, #2878e0 100%);
+  --water-blue: #1570c0;
+  --bubble: rgba(255,255,255,0.18);
+  --text-dark: #0a2a4a;
+  --text-mid: #1a4a7a;
+  --text-xp: #fff;
+}
+
+body {
+  font-family: 'Nunito', Tahoma, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  background: #1a8fe0;
+}
+
+/* SKY + GRASS BACKGROUND */
+.bg-scene { position: fixed; inset: 0; z-index: 0; overflow: hidden; }
+.bg-sky {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, #0855a8 0%, #0f72cc 18%, #1a8fe0 40%, #3ab0ef 65%, #7ecff5 80%, #b8e8f8 90%, #c8f0e0 95%, #80cc44 95%, #3aaa18 97%, #2a8a10 100%);
+}
+.bg-sun {
+  position: absolute; top: 6%; right: 12%; width: 90px; height: 90px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #fffde0 0%, #fff8a0 30%, #ffd820 55%, #ffaa00 80%, #ff8800 100%);
+  box-shadow: 0 0 0 12px rgba(255,240,100,0.18), 0 0 0 28px rgba(255,230,80,0.10), 0 0 60px 20px rgba(255,210,0,0.35), 0 0 0 60px rgba(255,200,0,0.06);
+}
+.cloud { position: absolute; background: rgba(255,255,255,0.92); border-radius: 50px; }
+.cloud::before, .cloud::after { content: ''; position: absolute; background: rgba(255,255,255,0.92); border-radius: 50%; }
+.c1 { width: 160px; height: 45px; top: 12%; left: 8%; }
+.c1::before { width: 70px; height: 70px; top: -35px; left: 20px; }
+.c1::after { width: 55px; height: 55px; top: -28px; left: 65px; }
+.c2 { width: 120px; height: 35px; top: 8%; left: 32%; opacity: 0.85; }
+.c2::before { width: 55px; height: 55px; top: -28px; left: 15px; }
+.c2::after { width: 40px; height: 40px; top: -22px; left: 55px; }
+.c3 { width: 200px; height: 50px; top: 18%; left: 55%; opacity: 0.9; }
+.c3::before { width: 80px; height: 80px; top: -42px; left: 30px; }
+.c3::after { width: 65px; height: 65px; top: -35px; left: 90px; }
+.c4 { width: 100px; height: 30px; top: 5%; left: 70%; opacity: 0.7; }
+.c4::before { width: 45px; height: 45px; top: -22px; left: 12px; }
+.c4::after { width: 38px; height: 38px; top: -18px; left: 45px; }
+
+.bubble-float {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.55) 0%, rgba(200,235,255,0.18) 40%, rgba(100,190,240,0.08) 70%, transparent 100%);
+  border: 1.5px solid rgba(255,255,255,0.55);
+  box-shadow: inset 0 -8px 16px rgba(100,180,240,0.15), inset 4px 4px 10px rgba(255,255,255,0.4), 0 4px 16px rgba(0,80,180,0.12);
+}
+.bubble-float::after {
+  content: ''; position: absolute; top: 12%; left: 18%; width: 30%; height: 20%;
+  background: rgba(255,255,255,0.5); border-radius: 50%; filter: blur(3px); transform: rotate(-20deg);
+}
+.bf1 { width: 120px; height: 120px; top: 22%; left: 4%; }
+.bf2 { width: 70px; height: 70px; top: 45%; left: 1%; }
+.bf3 { width: 90px; height: 90px; top: 15%; right: 5%; }
+.bf4 { width: 50px; height: 50px; top: 38%; right: 8%; }
+.bf5 { width: 150px; height: 150px; bottom: 18%; left: 12%; opacity: 0.7; }
+.bf6 { width: 55px; height: 55px; bottom: 30%; right: 15%; opacity: 0.8; }
+.bf7 { width: 40px; height: 40px; top: 62%; left: 45%; opacity: 0.6; }
+
+.bird { position: absolute; font-size: 18px; opacity: 0.7; filter: drop-shadow(0 1px 2px rgba(0,50,120,0.3)); }
+.bird1 { top: 22%; left: 25%; font-size: 14px; transform: scaleX(-1); }
+.bird2 { top: 19%; left: 28%; font-size: 10px; }
+.bird3 { top: 14%; left: 18%; font-size: 12px; transform: scaleX(-1); }
+
+.wrapper { position: relative; z-index: 5; min-height: 100vh; display: flex; flex-direction: column; }
+.xp-window-main {
+  margin: 1.2rem auto 0; max-width: 860px; width: calc(100% - 2rem);
+  border-radius: 8px 8px 0 0; overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(0,0,60,0.5), 0 8px 32px rgba(0,40,120,0.45), inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.xp-titlebar { background: var(--xp-titlebar); padding: 5px 8px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #0a3a8a; }
+.xp-icon-main { width: 20px; height: 20px; background: linear-gradient(135deg, #60c8ff, #1060d0); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.4); }
+.xp-title-text { font-family: 'Nunito', Tahoma, sans-serif; font-size: 0.8rem; font-weight: 700; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); flex: 1; }
+.xp-btns { display: flex; gap: 3px; }
+.xp-btn { width: 21px; height: 21px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; cursor: default; color: #fff; text-shadow: 0 1px 1px rgba(0,0,0,0.4); background: linear-gradient(180deg, #70c0f8 0%, #3080e0 45%, #1868cc 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.4); }
+.xp-btn.close-btn { background: linear-gradient(180deg, #f88 0%, #e03030 45%, #c02020 100%); }
+
+.header-content { background: linear-gradient(160deg, rgba(255,255,255,0.72) 0%, rgba(210,240,255,0.65) 40%, rgba(180,228,252,0.6) 100%); border: 1.5px solid rgba(255,255,255,0.8); border-top: none; padding: 1.4rem 2rem; text-align: center; backdrop-filter: blur(12px); border-bottom: 1px solid rgba(200,230,255,0.6); position: relative; overflow: hidden; }
+.header-content::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 45%; background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, transparent 100%); pointer-events: none; }
+.version-pill { display: inline-flex; align-items: center; gap: 5px; background: linear-gradient(90deg, #1a9ae0, #0d70c0); color: #fff; font-size: 0.7rem; font-weight: 800; letter-spacing: 1.5px; padding: 4px 12px; border-radius: 20px; margin-bottom: 0.7rem; text-transform: uppercase; box-shadow: 0 2px 10px rgba(20,100,200,0.4), inset 0 1px 0 rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.3); }
+.header-content h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(1rem, 2.8vw, 1.6rem); font-weight: 700; color: #0a2a5a; text-shadow: 0 1px 0 rgba(255,255,255,0.9), 0 2px 8px rgba(20,80,180,0.2); margin-bottom: 0.3rem; line-height: 1.3; }
+.header-content h1 .highlight { color: #0a70d0; }
+.header-sub { font-size: 0.82rem; color: #1a5090; font-weight: 700; }
+
+.marquee-bar { background: linear-gradient(90deg, rgba(20,90,200,0.55), rgba(40,130,240,0.6), rgba(20,90,200,0.55)); border-top: 1px solid rgba(100,180,255,0.5); border-bottom: 1px solid rgba(0,40,120,0.3); padding: 5px 0; overflow: hidden; max-width: 860px; margin: 0 auto; width: calc(100% - 2rem); }
+.marquee-inner { display: inline-flex; gap: 2.5rem; white-space: nowrap; animation: marquee 20s linear infinite; font-size: 0.72rem; font-weight: 800; color: rgba(255,255,255,0.9); letter-spacing: 1px; text-shadow: 0 0 6px rgba(120,200,255,0.7); text-transform: uppercase; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.nav-area { max-width: 860px; margin: 0 auto; width: calc(100% - 2rem); background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(200,230,252,0.55) 100%); border-left: 1.5px solid rgba(255,255,255,0.8); border-right: 1.5px solid rgba(255,255,255,0.8); border-bottom: 1.5px solid rgba(255,255,255,0.7); backdrop-filter: blur(10px); padding: 8px 10px; display: flex; gap: 5px; flex-wrap: wrap; }
+.nav-tab { background: linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(210,235,255,0.75) 50%, rgba(185,220,250,0.7) 100%); border: 1px solid rgba(180,210,240,0.7); border-radius: 4px 4px 0 0; padding: 5px 14px; font-size: 0.78rem; font-weight: 800; color: #0a3a7a; cursor: pointer; transition: all 0.15s; box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 1px 3px rgba(0,40,120,0.15); border-bottom: 2px solid rgba(100,180,240,0.4); position: relative; }
+.nav-tab:hover { background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(225,245,255,0.9) 50%, rgba(200,235,255,0.85) 100%); border-color: rgba(100,170,230,0.8); }
+.nav-tab.active { background: linear-gradient(180deg, #fff 0%, rgba(230,245,255,0.95) 100%); border-color: rgba(80,150,220,0.7); border-bottom: 2px solid #1a80d8; color: #0a2a6a; box-shadow: inset 0 1px 0 rgba(255,255,255,1), 0 2px 6px rgba(0,60,180,0.2); }
+
+.main-body { max-width: 860px; margin: 0 auto; width: calc(100% - 2rem); background: linear-gradient(160deg, rgba(255,255,255,0.68) 0%, rgba(215,240,255,0.6) 50%, rgba(190,228,252,0.58) 100%); border: 1.5px solid rgba(255,255,255,0.8); border-top: none; border-radius: 0 0 8px 8px; backdrop-filter: blur(14px); padding: 1.2rem; box-shadow: 0 8px 32px rgba(0,40,120,0.3), 0 0 0 1px rgba(0,0,60,0.15); margin-bottom: 1.5rem; min-height: 400px; }
+.page { display: none; }
+.page.active { display: block; }
+
+.cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 1rem; }
+.cat-card { background: linear-gradient(160deg, rgba(255,255,255,0.75) 0%, rgba(210,238,255,0.65) 50%, rgba(185,225,252,0.6) 100%); border: 1.5px solid rgba(255,255,255,0.85); border-radius: 8px; padding: 1.1rem 0.8rem; text-align: center; cursor: default; box-shadow: 0 3px 14px rgba(0,60,160,0.15), inset 0 1px 0 rgba(255,255,255,0.9); position: relative; overflow: hidden; }
+.cat-icon { font-size: 2rem; display: block; margin-bottom: 0.4rem; filter: drop-shadow(0 2px 4px rgba(0,60,160,0.25)); }
+.cat-title { font-size: 0.8rem; font-weight: 800; color: #0a2a5a; margin-bottom: 0.15rem; }
+.cat-desc { font-size: 0.68rem; color: #2060a0; font-weight: 600; line-height: 1.4; }
+.c-juegos { border-top: 3px solid #e04020; } .c-msdos { border-top: 3px solid #1860c0; } .c-snes { border-top: 3px solid #20aa40; } .c-rec { border-top: 3px solid #10a0c0; } .c-cur { border-top: 3px solid #c0a000; } .c-doc { border-top: 3px solid #8040c0; }
+
+.glass-panel { background: linear-gradient(145deg, rgba(255,255,255,0.62) 0%, rgba(210,238,255,0.55) 60%, rgba(185,225,252,0.5) 100%); border: 1.5px solid rgba(255,255,255,0.8); border-radius: 8px; padding: 1.2rem 1.3rem; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,50,150,0.1), inset 0 1px 0 rgba(255,255,255,0.85); }
+.panel-titlebar { display: flex; align-items: center; gap: 7px; margin-bottom: 0.9rem; padding-bottom: 8px; border-bottom: 1px solid rgba(100,170,230,0.35); }
+.panel-icon { font-size: 1.2rem; }
+.panel-title { font-size: 0.9rem; font-weight: 800; color: #0a2a5a; flex: 1; }
+.panel-badge { font-size: 0.65rem; font-weight: 800; padding: 2px 8px; border-radius: 10px; background: linear-gradient(90deg, #1888d8, #0d68c0); color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.info-block { background: rgba(255,255,255,0.5); border: 1px solid rgba(200,228,252,0.65); border-left: 3px solid #1888d8; border-radius: 0 6px 6px 0; padding: 0.75rem 1rem; margin-bottom: 8px; }
+.info-block.green { border-left-color: #28a830; } .info-block.orange { border-left-color: #d06820; } .info-block.purple { border-left-color: #8040c0; } .info-block.teal { border-left-color: #0898b8; }
+.info-label { font-size: 0.72rem; font-weight: 900; color: #0a3a7a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.3rem; }
+.info-text { font-size: 0.8rem; color: #1a4a80; font-weight: 600; line-height: 1.6; }
+
+.atajos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+.atajo-tile { background: rgba(255,255,255,0.55); border: 1px solid rgba(180,215,245,0.65); border-radius: 6px; padding: 0.7rem; text-align: center; }
+.key-cap { display: inline-block; font-family: 'Orbitron', Tahoma, monospace; font-size: 0.72rem; font-weight: 700; color: #0a3070; background: linear-gradient(180deg, #f0f4fa 0%, #d8e8f5 50%, #c5d8ee 100%); border: 1px solid #8ab0d8; border-bottom: 3px solid #5888c0; border-radius: 5px; padding: 4px 10px; margin-bottom: 5px; }
+.atajo-desc { font-size: 0.7rem; color: #1a4a80; font-weight: 600; line-height: 1.4; }
+
+.link-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.link-row { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.52); border: 1px solid rgba(180,215,245,0.6); border-radius: 6px; padding: 0.65rem 1rem; text-decoration: none; cursor: pointer; }
+.link-row:hover { background: rgba(255,255,255,0.78); border-color: rgba(80,160,230,0.6); }
+.link-led { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.link-name { font-size: 0.8rem; font-weight: 800; color: #0a408a; flex: 1; }
+.link-url-text { font-size: 0.68rem; color: #3070b0; font-weight: 600; }
+
+.changelog { display: flex; flex-direction: column; gap: 0; }
+.cl-row { display: flex; gap: 12px; align-items: flex-start; padding: 0.6rem 0; border-bottom: 1px solid rgba(180,220,250,0.35); }
+.ver-tag { font-family: 'Orbitron', monospace; font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 4px; background: rgba(30,120,220,0.18); color: #0a3a8a; border: 1px solid rgba(60,140,230,0.3); min-width: 45px; text-align: center; flex-shrink: 0; }
+.cl-text { font-size: 0.78rem; color: #1a4a80; font-weight: 600; line-height: 1.5; }
+
+.welcome-glass { background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(200,235,255,0.6) 100%); border: 2px solid rgba(255,255,255,0.85); border-radius: 10px; padding: 1.2rem 1.4rem; box-shadow: 0 4px 20px rgba(0,60,180,0.15); }
+
+/* SISTEMA DE CHAT */
+.chat-wrapper { border: 1px solid #8ab0d8; background: #fff; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; height: 480px; box-shadow: 0 4px 15px rgba(0,40,100,0.1); }
+.chat-setup { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; background: #f0f4fa; padding: 20px; text-align: center; }
+.chat-setup input { padding: 10px; font-size: 1rem; border: 2px solid #a0bcdc; border-radius: 6px; margin: 10px 0; width: 80%; max-width: 300px; text-align: center; font-family: 'Nunito', sans-serif; font-weight: 700; color: #0a3a7a; }
+.chat-setup button { background: linear-gradient(180deg, #70c0f8, #1868cc); color: #fff; border: none; padding: 10px 25px; border-radius: 6px; font-weight: 800; font-size: 1rem; cursor: pointer; }
+.avatar-preview-box { width: 60px; height: 60px; border-radius: 50%; background: #d9e6f8; border: 2px dashed #a0bcdc; display: flex; align-items: center; justify-content: center; overflow: hidden; margin: 5px auto; cursor: pointer; position: relative; }
+.avatar-preview-box img { width: 100%; height: 100%; object-fit: cover; }
+.chat-main { display: none; flex-direction: column; height: 100%; }
+.chat-header-bar { background: #e8eef5; padding: 8px 12px; border-bottom: 1px solid #a0bcdc; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; font-weight: 800; color: #0a3a7a; }
+.chat-header-actions { display: flex; gap: 6px; align-items: center; }
+.change-name-btn { background: #d9e6f8; border: 1px solid #a0bcdc; padding: 3px 8px; border-radius: 4px; font-size: 0.65rem; cursor: pointer; color: #104a90; font-weight: bold; }
+.chat-messages { flex: 1; padding: 15px; overflow-y: auto; background: #f4f7fc; display: flex; flex-direction: column; gap: 12px; }
+.msg-row { display: flex; gap: 10px; align-items: flex-start; }
+.msg-avatar { width: 36px; height: 36px; background: linear-gradient(135deg, #a4c2f4, #6d9eeb); border-radius: 50%; border: 1px solid #7a9cc6; flex-shrink: 0; display:flex; align-items:center; justify-content:center; font-size:14px; color: #fff; font-weight: bold; text-transform: uppercase; overflow: hidden; }
+.msg-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.msg-content { flex: 1; }
+.msg-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+.msg-name { font-size: 0.75rem; font-weight: 800; color: #104a90; }
+.msg-time { font-size: 0.6rem; color: #666; display: flex; gap: 6px; align-items: center; }
+.msg-bubble { background: #fff; padding: 8px 12px; border-radius: 0 8px 8px 8px; border: 1px solid #d0dbe8; font-size: 0.85rem; color: #1a4a80; font-weight: 600; line-height: 1.4; display: inline-block; max-width: 100%; position: relative; }
+.msg-img { margin-top: 6px; max-width: 200px; max-height: 150px; border-radius: 6px; border: 1px solid #ccc; display: block; cursor: pointer; }
+.reply-badge { background: #e8f0fe; border-left: 3px solid #4a8cdb; padding: 4px 8px; font-size: 0.7rem; color: #4a8cdb; border-radius: 0 4px 4px 0; margin-bottom: 4px; font-style: italic; }
+.btn-reply { font-size: 0.65rem; color: #4a8cdb; background: none; border: none; cursor: pointer; font-weight: 700; opacity: 0.7; }
+.btn-reply:hover { opacity: 1; text-decoration: underline; }
+.btn-delete-msg { font-size: 0.65rem; color: #e03030; background: none; border: none; cursor: pointer; font-weight: 700; opacity: 0.8; }
+.btn-delete-msg:hover { opacity: 1; text-decoration: underline; }
+
+.chat-input-area { background: #e8eef5; border-top: 1px solid #8ab0d8; display: flex; flex-direction: column; }
+.reply-preview { display: none; background: #d9e6f8; padding: 6px 12px; font-size: 0.7rem; color: #104a90; font-weight: 700; border-bottom: 1px solid #a0bcdc; justify-content: space-between; align-items: center; }
+.cancel-reply { cursor: pointer; color: #e03030; font-weight: bold; background: none; border: none; }
+.input-row { display: flex; padding: 10px; gap: 8px; align-items: center; }
+.chat-input { flex: 1; padding: 10px; border: 1px solid #a0bcdc; border-radius: 4px; font-family: 'Nunito', sans-serif; font-weight: 600; color: #0a3a7a; }
+.file-upload-btn { background: #d9e6f8; border: 1px solid #a0bcdc; color: #104a90; padding: 9px 12px; border-radius: 4px; font-weight: 800; cursor: pointer; font-size: 0.8rem; }
+#imagenInput, #avatarSetupInput, #avatarChangeInput { display: none; }
+.chat-btn { background: linear-gradient(180deg, #70c0f8, #1868cc); color: #fff; border: 1px solid #1050a0; padding: 10px 18px; border-radius: 4px; font-weight: 800; cursor: pointer; }
+
+.taskbar { max-width: 860px; margin: 0 auto 1rem; width: calc(100% - 2rem); background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(200,230,252,0.55) 100%); border: 1.5px solid rgba(255,255,255,0.75); border-radius: 30px; backdrop-filter: blur(10px); padding: 6px 14px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.7rem; font-weight: 700; color: #0a3a7a; }
+.taskbar-star { color: #1880d8; font-size: 0.8rem; }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   DISEÑO ACTUALIZADO · Retro dashboard / glassmorphism
+   Keeps the original Windows XP soul, but improves hierarchy and usability.
+   ───────────────────────────────────────────────────────────────────────── */
+:root {
+  --ink: #102a4d;
+  --muted-ink: #476b91;
+  --navy: #09244a;
+  --blue: #0878d1;
+  --cyan: #1bc3e5;
+  --violet: #765ff0;
+  --surface: rgba(246, 251, 255, 0.82);
+  --surface-strong: rgba(255, 255, 255, 0.94);
+  --line: rgba(130, 181, 224, 0.34);
+  --shadow: 0 24px 70px rgba(3, 30, 86, 0.26);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(102, 224, 255, 0.24), transparent 28rem),
+    radial-gradient(circle at 86% 20%, rgba(119, 105, 255, 0.2), transparent 25rem),
+    #071c3b;
+  font-size: 15px;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, black, transparent 88%);
+}
+
+.bg-scene { opacity: .68; }
+.bg-sky {
+  background:
+    url('imagen_de_referencia_1789263771883.png') center / cover no-repeat,
+    radial-gradient(circle at 78% 12%, rgba(255, 235, 123, .42), transparent 10rem),
+    linear-gradient(180deg, #08245a 0%, #0b4f9f 28%, #1598dc 61%, #8bd9ee 86%, #5fb837 100%);
+  background-blend-mode: screen, normal, normal;
+}
+.bg-sun { width: 74px; height: 74px; top: 8%; right: 14%; opacity: .9; }
+.cloud { filter: blur(.2px); opacity: .72; }
+
+.wrapper {
+  z-index: 5;
+  padding: 1.25rem 0 0;
+}
+
+.xp-window-main,
+.marquee-bar,
+.nav-area,
+.main-body,
+.taskbar {
+  max-width: 1120px;
+  width: min(1120px, calc(100% - 2rem));
+}
+
+.xp-window-main {
+  margin-top: 0;
+  border-radius: 18px 18px 0 0;
+  box-shadow: var(--shadow), 0 0 0 1px rgba(255,255,255,.18);
+}
+
+.xp-titlebar {
+  min-height: 42px;
+  padding: 8px 12px;
+  gap: 9px;
+  background: linear-gradient(135deg, #163a82 0%, #0f68c3 48%, #13a0d8 100%);
+  border-bottom: 1px solid rgba(4, 29, 91, .72);
+}
+.xp-icon-main {
+  width: 25px;
+  height: 25px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ffd86b, #ff8b38);
+  box-shadow: 0 4px 10px rgba(4, 20, 70, .3);
+}
+.xp-title-text { font-size: .82rem; letter-spacing: .01em; }
+.xp-btns { gap: 5px; }
+.xp-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+}
+
+.header-content {
+  padding: clamp(2rem, 5vw, 3.6rem) clamp(1.3rem, 6vw, 4.4rem);
+  text-align: left;
+  background:
+    url('imagen_de_referencia_1789263771883.png') right center / cover no-repeat,
+    radial-gradient(circle at 84% 18%, rgba(110, 229, 255, .38), transparent 13rem),
+    linear-gradient(135deg, rgba(255,255,255,.94), rgba(211,239,255,.79) 54%, rgba(199,216,255,.73));
+  background-blend-mode: screen, normal, normal;
+}
+.header-content::after {
+  content: "★ 01";
+  position: absolute;
+  right: clamp(1.25rem, 6vw, 4.5rem);
+  bottom: 1.3rem;
+  color: rgba(23, 101, 180, .25);
+  font: 800 clamp(2rem, 8vw, 5.5rem)/1 'Orbitron', sans-serif;
+  letter-spacing: -.08em;
+}
+.version-pill {
+  margin-bottom: 1rem;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #096fcb, #0bb5cf);
+  box-shadow: 0 8px 20px rgba(14, 119, 205, .24);
+}
+.header-content h1 {
+  max-width: 760px;
+  font-size: clamp(1.65rem, 5vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -.04em;
+}
+.header-content h1 .highlight {
+  color: #086dc8;
+  text-shadow: 0 0 22px rgba(34, 173, 238, .28);
+}
+.header-sub {
+  max-width: 600px;
+  margin-top: .85rem;
+  color: #35688f;
+  font-size: .92rem;
+  letter-spacing: .02em;
+}
+
+.marquee-bar {
+  border: 0;
+  border-radius: 0;
+  background: rgba(5, 47, 113, .66);
+  box-shadow: 0 8px 20px rgba(2, 26, 80, .15);
+}
+.marquee-inner {
+  padding: 2px 0;
+  font-family: 'DM Mono', monospace;
+  font-size: .67rem;
+  letter-spacing: .12em;
+}
+
+.nav-area {
+  position: sticky;
+  top: 12px;
+  z-index: 20;
+  padding: 10px;
+  gap: 7px;
+  background: rgba(225, 243, 255, .76);
+  border: 1px solid rgba(255,255,255,.72);
+  box-shadow: 0 12px 26px rgba(9, 49, 111, .14);
+}
+.nav-tab {
+  flex: 1 1 auto;
+  min-height: 38px;
+  padding: 8px 13px;
+  border: 1px solid rgba(125, 172, 215, .42);
+  border-radius: 9px;
+  color: #23527e;
+  background: rgba(255,255,255,.62);
+  box-shadow: none;
+  transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+}
+.nav-tab:hover {
+  transform: translateY(-2px);
+  color: #0759ac;
+  background: rgba(255,255,255,.92);
+  border-color: rgba(15, 129, 216, .45);
+}
+.nav-tab.active {
+  color: #fff;
+  background: linear-gradient(135deg, #075db6, #0aa5d1);
+  border-color: transparent;
+  box-shadow: 0 7px 16px rgba(12, 108, 193, .28);
+}
+
+.main-body {
+  padding: clamp(1rem, 3vw, 1.75rem);
+  border: 1px solid rgba(255,255,255,.72);
+  background: rgba(220, 241, 255, .74);
+  box-shadow: var(--shadow);
+}
+.cat-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 1.25rem;
+}
+.cat-card {
+  min-height: 165px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.35rem 1rem;
+  border: 1px solid rgba(255,255,255,.9);
+  border-top-width: 4px;
+  border-radius: 15px;
+  background: linear-gradient(145deg, rgba(255,255,255,.9), rgba(215,239,255,.67));
+  box-shadow: 0 10px 22px rgba(20, 91, 161, .1);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.cat-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255,255,255,1);
+  box-shadow: 0 18px 28px rgba(18, 91, 164, .18);
+}
+.cat-icon { font-size: 2.35rem; margin-bottom: .7rem; }
+.cat-title { font-size: .92rem; }
+.cat-desc { max-width: 190px; margin: 0 auto; font-size: .72rem; }
+
+.home-hero {
+  position: relative;
+  min-height: 190px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin: 0 0 1.25rem;
+  padding: clamp(1.35rem, 4vw, 2rem);
+  border: 1px solid rgba(255,255,255,.9);
+  border-radius: 16px;
+  isolation: isolate;
+  background:
+    linear-gradient(90deg, rgba(3, 42, 102, .96) 0%, rgba(7, 88, 166, .82) 46%, rgba(7, 88, 166, .18) 100%),
+    url('imagen_de_referencia_1789263771883.png') center / cover no-repeat;
+  box-shadow: 0 14px 30px rgba(18, 77, 140, .2), inset 0 1px 0 rgba(255,255,255,.6);
+}
+.home-hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    radial-gradient(circle at 72% 34%, rgba(255,255,255,.82) 0 2px, transparent 3px),
+    radial-gradient(circle at 82% 55%, rgba(255,255,255,.72) 0 1px, transparent 2px),
+    radial-gradient(circle at 90% 22%, rgba(255,255,255,.65) 0 1px, transparent 2px);
+  opacity: .7;
+}
+.home-hero-content { max-width: 560px; color: #fff; }
+.home-hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: .65rem;
+  color: #aef5ff;
+  font: 500 .68rem/1 'DM Mono', monospace;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.home-hero h2 {
+  margin-bottom: .55rem;
+  color: #fff;
+  font: 800 clamp(1.25rem, 3.4vw, 2.15rem)/1.08 'Orbitron', sans-serif;
+  letter-spacing: -.04em;
+  text-shadow: 0 3px 16px rgba(0, 25, 80, .45);
+}
+.home-hero p {
+  max-width: 490px;
+  color: rgba(237, 250, 255, .9);
+  font-size: .83rem;
+  font-weight: 700;
+  line-height: 1.55;
+}
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 1rem;
+}
+.hero-pill {
+  padding: 5px 9px;
+  border: 1px solid rgba(186, 245, 255, .42);
+  border-radius: 999px;
+  background: rgba(255,255,255,.13);
+  color: #e5fbff;
+  font-size: .64rem;
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.welcome-glass,
+.glass-panel {
+  border: 1px solid rgba(255,255,255,.85);
+  border-radius: 15px;
+  background: linear-gradient(145deg, rgba(255,255,255,.88), rgba(216,239,255,.65));
+  box-shadow: 0 10px 24px rgba(20, 91, 161, .1);
+}
+.welcome-glass { padding: 1.35rem 1.5rem; }
+.glass-panel { padding: clamp(1rem, 3vw, 1.45rem); }
+.panel-titlebar { padding-bottom: 11px; }
+.panel-title { font-size: 1rem; }
+.panel-badge {
+  border-radius: 999px;
+  background: linear-gradient(90deg, #0877c9, #09a9c6);
+}
+.info-block {
+  padding: .9rem 1rem;
+  border-radius: 0 10px 10px 0;
+  background: rgba(255,255,255,.64);
+}
+.info-text { font-size: .84rem; }
+.atajo-tile {
+  border-radius: 10px;
+  background: rgba(255,255,255,.64);
+  transition: transform .2s ease;
+}
+.atajo-tile:hover { transform: translateY(-3px); }
+.key-cap {
+  font-family: 'DM Mono', monospace;
+  border-radius: 7px;
+}
+.link-row {
+  min-height: 50px;
+  padding: .75rem 1rem;
+  border-radius: 10px;
+  background: rgba(255,255,255,.62);
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.link-row:hover {
+  transform: translateX(4px);
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 8px 18px rgba(22, 96, 164, .12);
+}
+.link-name { font-size: .84rem; }
+.link-url-text { font-family: 'DM Mono', monospace; }
+
+.chat-wrapper {
+  height: 560px;
+  border: 1px solid rgba(92, 146, 194, .5);
+  border-radius: 15px;
+  box-shadow: 0 12px 26px rgba(14, 66, 128, .12);
+}
+.chat-setup { background: linear-gradient(145deg, #f8fcff, #e5f2ff); }
+.chat-setup h2 { font-family: 'Orbitron', sans-serif; }
+.chat-header-bar,
+.chat-input-area { background: rgba(232, 242, 252, .95); }
+.chat-messages { background: linear-gradient(180deg, #eef7ff, #f8fbff); }
+.msg-bubble { border-radius: 4px 13px 13px 13px; }
+.chat-input { border-radius: 9px; }
+.file-upload-btn,
+.chat-btn,
+.chat-setup button { border-radius: 9px; }
+.chat-btn {
+  background: linear-gradient(135deg, #075db6, #08a8ce);
+  border-color: transparent;
+  box-shadow: 0 6px 13px rgba(12, 108, 193, .2);
+}
+
+.taskbar {
+  margin-top: .2rem;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: rgba(227, 245, 255, .76);
+  box-shadow: 0 12px 30px rgba(2, 30, 80, .18);
+}
+
+button, a, input, .cat-card, .link-row { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 3px solid rgba(20, 188, 229, .65);
+  outline-offset: 2px;
+}
+
+@media (max-width: 720px) {
+  .wrapper { padding-top: .65rem; }
+  .xp-window-main, .marquee-bar, .nav-area, .main-body, .taskbar {
+    width: calc(100% - 1rem);
+  }
+  .xp-title-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .xp-btns { display: none; }
+  .header-content { padding: 2rem 1.25rem 2.4rem; }
+  .header-content h1 { font-size: clamp(1.7rem, 9vw, 2.6rem); }
+  .header-content::after { right: 1rem; bottom: .8rem; font-size: 2.3rem; }
+  .nav-area { top: 6px; }
+  .nav-tab { flex: 1 1 calc(50% - 7px); font-size: .74rem; }
+  .cat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .cat-card { min-height: 145px; padding: 1rem .65rem; }
+  .cat-icon { font-size: 2rem; }
+  .link-url-text { display: none; }
+  .input-row { flex-wrap: wrap; }
+  .chat-input { flex-basis: 100%; order: -1; }
+}
+
+@media (max-width: 420px) {
+  .cat-grid { grid-template-columns: 1fr; }
+  .cat-card { min-height: 120px; }
+  .atajos-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .nav-tab { flex-basis: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-scene">
+  <div class="bg-sky"></div><div class="bg-sun"></div>
+  <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div><div class="cloud c4"></div>
+  <div class="bubble-float bf1"></div><div class="bubble-float bf2"></div><div class="bubble-float bf3"></div><div class="bubble-float bf4"></div><div class="bubble-float bf5"></div><div class="bubble-float bf6"></div><div class="bubble-float bf7"></div>
+  <span class="bird bird1">🐦</span><span class="bird bird2">🐦</span><span class="bird bird3">🐦</span>
+</div>
+
+<div class="wrapper">
+  <div class="xp-window-main">
+    <div class="xp-titlebar">
+      <div class="xp-icon-main">⭐</div>
+      <div class="xp-title-text">Los Archivos Públicos (Lucas) ALL STARS! — v1.3</div>
+      <div class="xp-btns"><div class="xp-btn">─</div><div class="xp-btn">□</div><div class="xp-btn close-btn">✕</div></div>
+    </div>
+    <div class="header-content">
+      <div class="version-pill">✦ ALL STARS! v 1.3 ✦</div>
+      <h1>Los Archivos Públicos <span class="highlight">(Lucas)</span></h1>
+      <div class="header-sub">✦ Centro de recursos de la sala de computación ✦</div>
+    </div>
+  </div>
+
+  <div class="marquee-bar">
+    <div class="marquee-inner">
+      ✦ JUEGOS &nbsp;·&nbsp; RECURSOS &nbsp;·&nbsp; SNES9X &nbsp;·&nbsp; MS-DOS &nbsp;·&nbsp; CURSORES &nbsp;·&nbsp; MUSICA &nbsp;·&nbsp; TUTORIALES &nbsp;·&nbsp; CHAT &nbsp;·&nbsp; FUENTES &nbsp;·&nbsp;
+      ✦ JUEGOS &nbsp;·&nbsp; RECURSOS &nbsp;·&nbsp; SNES9X &nbsp;·&nbsp; MS-DOS &nbsp;·&nbsp; CURSORES &nbsp;·&nbsp; MUSICA &nbsp;·&nbsp; TUTORIALES &nbsp;·&nbsp; CHAT &nbsp;·&nbsp; FUENTES &nbsp;·&nbsp;
+    </div>
+  </div>
+
+  <nav class="nav-area">
+    <button class="nav-tab active" onclick="showTab('inicio', this)">🏠 Inicio</button>
+    <button class="nav-tab" onclick="showTab('como-usar', this)">📖 Cómo usar</button>
+    <button class="nav-tab" onclick="showTab('extras', this)">⚡ Extras</button>
+    <button class="nav-tab" onclick="showTab('links', this)">🌐 Páginas web</button>
+    <button class="nav-tab" onclick="showTab('actualizaciones', this)">📋 Actualizaciones</button>
+    <button class="nav-tab" onclick="showTab('chat', this)">💬 Sala de Chat</button>
+  </nav>
+
+  <div class="main-body">
+
+    <!-- INICIO -->
+    <div id="page-inicio" class="page active">
+      <div class="cat-grid">
+        <div class="cat-card c-juegos"><span class="cat-icon">🎮</span><div class="cat-title">Juegos de PC</div><div class="cat-desc">Ejecutables .exe instalables. Alt+F4 para cerrar rápido.</div></div>
+        <div class="cat-card c-msdos"><span class="cat-icon">💾</span><div class="cat-title">Juegos MS-DOS</div><div class="cat-desc">Clásicos retro. Necesitás un emulador como DOSBox.</div></div>
+        <div class="cat-card c-snes"><span class="cat-icon">🕹️</span><div class="cat-title">SNES9X</div><div class="cat-desc">Super Nintendo en tu PC. 4 juegos ya cargados y listos.</div></div>
+        <div class="cat-card c-rec"><span class="cat-icon">🖼️</span><div class="cat-title">Recursos</div><div class="cat-desc">Imágenes, sonidos, videos y fuentes de texto.</div></div>
+        <div class="cat-card c-cur"><span class="cat-icon">🖱️</span><div class="cat-title">Cursores</div><div class="cat-desc">Cursores personalizados. Mejor usarlos en tu casa.</div></div>
+        <div class="cat-card c-doc"><span class="cat-icon">📄</span><div class="cat-title">Documentos</div><div class="cat-desc">Word, Excel, PowerPoint. Poné tu nombre en cada archivo.</div></div>
+      </div>
+      <section class="home-hero" aria-label="Resumen de Los Archivos Públicos">
+        <div class="home-hero-content">
+          <div class="home-hero-kicker">✦ Lucas digital archive / ready</div>
+          <h2>Todo lo que necesitás, en un solo lugar.</h2>
+          <p>Un centro de recursos con juegos, música, herramientas y tutoriales para explorar, crear y compartir desde la sala de computación.</p>
+          <div class="hero-pills">
+            <span class="hero-pill">6 categorías</span>
+            <span class="hero-pill">Retro + recursos</span>
+            <span class="hero-pill">Chat incluido</span>
+          </div>
+        </div>
+      </section>
+      <div class="welcome-glass">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:0.7rem;"><span style="font-size:1.4rem;">👋</span><div style="font-size:0.92rem; font-weight:800; color:#0a2a5a;">Bienvenida</div></div>
+        <div style="font-size:0.8rem; color:#1a4a80; font-weight:600; line-height:1.7; margin-bottom:0.6rem;">
+          Esta es la carpeta de recursos de <strong>Lucas Condori</strong> para la sala de computación. Acá vas a encontrar juegos, recursos, tutoriales y herramientas útiles organizadas en una sola app.
+        </div>
+        <div style="background:rgba(30,120,220,0.1); border:1px solid rgba(30,120,220,0.2); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.76rem; color:#1a5090; font-weight:700;">
+          💡 Cuando guardes tus trabajos, poné tu nombre en el archivo para saber cuál es el tuyo.
+        </div>
+      </div>
+    </div>
+
+    <!-- CÓMO USAR -->
+    <div id="page-como-usar" class="page">
+      <div class="glass-panel">
+        <div class="panel-titlebar"><span class="panel-icon">📖</span><div class="panel-title">Cómo usar los archivos</div></div>
+        <div class="info-block"><div class="info-label">🎮 Juegos de PC</div><div class="info-text">Buscá el archivo ejecutable <strong>.exe</strong> dentro de la carpeta del juego y hacé doble clic. Para cerrar un juego rápido usá <strong>Alt + F4</strong>. Los juegos funcionan en otras computadoras sin errores.</div></div>
+        <div class="info-block green"><div class="info-label">🕹️ SNES9X (Super Nintendo)</div><div class="info-text">Emulador de Super Nintendo con 4 juegos ya pre-cargados. Si no entendés cómo usarlo, buscá los tutoriales en la carpeta o preguntale a ChatGPT para que te explique paso a paso.</div></div>
+        <div class="info-block"><div class="info-label">💾 Juegos MS-DOS</div><div class="info-text">Requieren DOSBox u otro emulador de MS-DOS. Buscá el tutorial en la carpeta de tutoriales para saber cómo ejecutarlos.</div></div>
+        <div class="info-block orange"><div class="info-label">🖱️ Cursores personalizados</div><div class="info-text">En las computadoras del colegio probablemente no funcionen. En tu casa sí. Tenés que ir a Configuración → Mouse y cambiarlo manualmente, poniendo cada textura donde corresponde.</div></div>
+        <div class="info-block purple"><div class="info-label">🔤 Fuentes de texto</div><div class="info-text">Hay que instalarlas una por una. Clic derecho sobre el archivo de la fuente → Instalar. Después van a aparecer en Word, Photoshop, etc.</div></div>
+        <div class="info-block teal"><div class="info-label">🖼️ Imágenes</div><div class="info-text">Guardá acá imágenes descargadas, guardadas o generadas. Organizalas con carpetas o con tu nombre para encontrarlas fácil.</div></div>
+      </div>
+    </div>
+
+    <!-- EXTRAS -->
+    <div id="page-extras" class="page">
+      <div class="glass-panel" style="margin-bottom:12px;">
+        <div class="panel-titlebar"><span class="panel-icon">⌨️</span><div class="panel-title">Atajos de teclado</div><span class="panel-badge">Muy útiles</span></div>
+        <div class="atajos-grid">
+          <div class="atajo-tile"><div class="key-cap">Ctrl + C</div><div class="atajo-desc">Copiar lo seleccionado</div></div>
+          <div class="atajo-tile"><div class="key-cap">Ctrl + V</div><div class="atajo-desc">Pegar lo copiado</div></div>
+          <div class="atajo-tile"><div class="key-cap">Ctrl + X</div><div class="atajo-desc">Cortar y mover</div></div>
+          <div class="atajo-tile"><div class="key-cap">Ctrl + Z</div><div class="atajo-desc">Deshacer cambios</div></div>
+          <div class="atajo-tile"><div class="key-cap">Ctrl + Y</div><div class="atajo-desc">Rehacer lo deshecho</div></div>
+          <div class="atajo-tile"><div class="key-cap">Alt + F4</div><div class="atajo-desc">Cerrar ventana al instante</div></div>
+          <div class="atajo-tile"><div class="key-cap">Alt Gr + Q</div><div class="atajo-desc">Escribir @</div></div>
+          <div class="atajo-tile"><div class="key-cap">Alt Gr + 2</div><div class="atajo-desc">@ en teclados distintos</div></div>
+        </div>
+      </div>
+      
+      <!-- REPRODUCTOR DE MÚSICA / PLAYLIST -->
+      <div class="glass-panel" style="margin-bottom:12px;">
+        <div class="panel-titlebar">
+          <span class="panel-icon">🎵</span>
+          <div class="panel-title">Reproductor de Música (Playlist)</div>
+          <span class="panel-badge" id="nombreCancionActual">Selecciona una canción</span>
+        </div>
+        
+        <audio id="audioPlayer" controls style="width: 100%; margin-bottom: 10px;" onended="reproducirSiguiente()">
+          Tu navegador no soporta el reproductor de audio.
+        </audio>
+
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <button class="nav-tab" style="width: 100%; text-align: left; border-radius: 4px;" onclick="cambiarCancion('cancion1.mp3', 'Canción 1')">▶ 1. Canción 1</button>
+          <button class="nav-tab" style="width: 100%; text-align: left; border-radius: 4px;" onclick="cambiarCancion('cancion2.mp3', 'Canción 2')">▶ 2. Canción 2</button>
+          <button class="nav-tab" style="width: 100%; text-align: left; border-radius: 4px;" onclick="cambiarCancion('cancion3.mp3', 'Canción 3')">▶ 3. Canción 3</button>
+        </div>
+      </div>
+
+      <div class="glass-panel">
+        <div class="panel-titlebar"><span class="panel-icon">🎵</span><div class="panel-title">Descargar música y videos</div></div>
+        <div class="info-block teal"><div class="info-label">¿Qué es MP3 y MP4?</div><div class="info-text"><strong>MP3</strong>: solo audio comprimido, ideal para música y sonidos.<br><strong>MP4</strong>: video + audio juntos, para ver videos.</div></div>
+        <div class="info-block"><div class="info-label">Cómo descargar de YouTube</div><div class="info-text">1. Andá al video → Compartir → copiá el link<br>2. Pegalo en <strong>savetube.online</strong><br>3. Elegí MP3 (audio) o MP4 (video)<br>4. Convertir → Descargar. Va a estar en la carpeta Descargas.</div></div>
+        <div class="info-block green"><div class="info-label">🎮 Música de videojuegos — KHInsider</div><div class="info-text">La mejor página para soundtracks de videojuegos. Tiene miles de canciones de Mario, Zelda, Sonic, Pokémon y más, descargables en MP3. ¡Mucho más fácil que YouTube!</div></div>
+      </div>
+    </div>
+
+    <!-- PÁGINAS WEB -->
+    <div id="page-links" class="page">
+      <div class="glass-panel">
+        <div class="panel-titlebar"><span class="panel-icon">🌐</span><div class="panel-title">Páginas web funcionales</div><span class="panel-badge">6 sitios</span></div>
+        <ul class="link-list">
+          <li><a href="https://savetube.online" target="_blank" class="link-row"><div class="link-led" style="background:#e04020;"></div><span class="link-name">Savetube — Descargar YouTube en MP3 o MP4</span><span class="link-url-text">savetube.online</span></a></li>
+          <li><a href="https://mp3cow.net" target="_blank" class="link-row"><div class="link-led" style="background:#c0a000;"></div><span class="link-name">MP3Cow — YouTube a MP3 rápido</span><span class="link-url-text">mp3cow.net</span></a></li>
+          <li><a href="https://downloads.khinsider.com" target="_blank" class="link-row"><div class="link-led" style="background:#20aa40;"></div><span class="link-name">KHInsider — Soundtracks de videojuegos en MP3</span><span class="link-url-text">downloads.khinsider.com</span></a></li>
+          <li><a href="https://www.rw-designer.com/cursor-library" target="_blank" class="link-row"><div class="link-led" style="background:#8040c0;"></div><span class="link-name">RW-Designer — Biblioteca de cursores personalizados</span><span class="link-url-text">rw-designer.com</span></a></li>
+          <li><a href="https://www.retrostic.com/roms/snes" target="_blank" class="link-row"><div class="link-led" style="background:#0898b8;"></div><span class="link-name">Retrostic — ROMs de Super Nintendo (SNES)</span><span class="link-url-text">retrostic.com</span></a></li>
+          <li><a href="https://www.dosgamesarchive.com/games?s=y&b=title" target="_blank" class="link-row"><div class="link-led" style="background:#1860c0;"></div><span class="link-name">DOS Games Archive — Juegos clásicos de MS-DOS</span><span class="link-url-text">dosgamesarchive.com</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ACTUALIZACIONES -->
+    <div id="page-actualizaciones" class="page">
+      <div class="glass-panel">
+        <div class="panel-titlebar">
+          <span class="panel-icon">📋</span>
+          <div class="panel-title">Historial de versiones</div>
+          <button id="btnAbrirLogin" class="panel-badge" style="cursor:pointer; border:none;" onclick="mostrarLoginCreador()">Admin (Lucas)</button>
+        </div>
+
+        <!-- PANEL DE PREGUNTAS DE SEGURIDAD PARA SER CREADOR -->
+        <div id="areaLoginCreador" style="display:none; background:rgba(255,255,255,0.7); padding:1rem; border-radius:6px; margin-bottom:1rem; border:1px solid rgba(100,180,240,0.5);">
+          <div style="font-size:0.75rem; font-weight:800; color:#0a3a7a; margin-bottom:5px;">🔒 Pregunta de Seguridad 1:</div>
+          <input type="text" id="resp1" class="chat-input" placeholder="¿Cuáles son los snacks favoritos de Lucas?" style="width:100%; margin-bottom:8px;">
+          <div style="font-size:0.75rem; font-weight:800; color:#0a3a7a; margin-bottom:5px;">🔒 Pregunta de Seguridad 2:</div>
+          <input type="text" id="resp2" class="chat-input" placeholder="¿Qué trae en la mochila de Lucas?" style="width:100%; margin-bottom:10px;">
+          <button class="chat-btn" onclick="verificarCreador()">Verificar e Iniciar Sesión</button>
+        </div>
+
+        <!-- PANEL DE ADMINISTRADOR EXCLUSIVO (SOLO 2 BOTONES) -->
+        <div id="panelAdminExclusivo" style="display:none; background:rgba(230,245,255,0.85); padding:1rem; border-radius:8px; margin-bottom:1rem; border:1px solid #4a8cdb;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-size:0.8rem; font-weight:900; color:#0a3a7a;">⚙️ Panel de Control del Creador</span>
+            <button onclick="cerrarSesionCreador()" style="background:#e03030; color:#fff; border:none; padding:3px 8px; border-radius:4px; font-size:0.65rem; cursor:pointer; font-weight:bold;">Cerrar Sesión</button>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="chat-btn" style="font-size:0.75rem; padding:8px 12px;" onclick="abrirModalActualizacion()">➕ Añadir Actualización</button>
+            <button class="chat-btn" style="font-size:0.75rem; padding:8px 12px; background:linear-gradient(180deg, #f0a030, #c07010);" onclick="abrirModalCambiarNombre()">✏️ Cambiar Nombre de Usuario</button>
+          </div>
+        </div>
+
+        <!-- LISTA DINÁMICA DE ACTUALIZACIONES -->
+        <div class="changelog" id="listaActualizaciones"></div>
+      </div>
+    </div>
+
+    <!-- SALA DE CHAT -->
+    <div id="page-chat" class="page">
+      <div class="chat-wrapper">
+        <div class="chat-setup" id="chatSetup">
+          <h2 style="color: #0a3a7a; margin-bottom: 5px;">¡Bienvenido al Chat!</h2>
+          <p style="color: #4a8cdb; font-size: 0.85rem; margin-bottom: 10px;">Personaliza tu perfil e ingresa tu nombre.</p>
+          
+          <label for="avatarSetupInput" class="avatar-preview-box" title="Haz clic para elegir tu foto de perfil">
+            <span id="setupAvatarPlaceholder" style="font-size:24px;">📷</span>
+            <img id="setupAvatarImg" style="display:none;" />
+          </label>
+          <input type="file" id="avatarSetupInput" accept="image/*" onchange="previsualizarAvatarSetup(event)">
+          <span style="font-size: 0.65rem; color: #666; margin-bottom: 10px;">Elige tu foto de perfil (opcional)</span>
+
+          <input type="text" id="usernameInput" placeholder="Tu nombre..." maxlength="15" onkeypress="if(event.key === 'Enter') registrarUsuario()">
+          <button onclick="registrarUsuario()">Entrar al Chat</button>
+        </div>
+
+        <div class="chat-main" id="chatMain">
+          <div class="chat-header-bar">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div id="headerUserAvatar" class="msg-avatar" style="width:26px; height:26px; font-size:11px;"></div>
+              <span>Conectado como: <strong id="currentUserNameDisplay"></strong></span>
+            </div>
+            <div class="chat-header-actions">
+              <label for="avatarChangeInput" class="change-name-btn" style="cursor:pointer;">Cambiar foto</label>
+              <input type="file" id="avatarChangeInput" accept="image/*" onchange="cambiarFotoPerfil(event)">
+              <button class="change-name-btn" onclick="cambiarNombre()">Cambiar nombre</button>
+            </div>
+          </div>
+          
+          <div class="chat-messages" id="cajaMensajes"></div>
+          
+          <div class="chat-input-area">
+            <div class="reply-preview" id="replyPreview">
+              <span id="replyText">Respondiendo a...</span>
+              <button class="cancel-reply" onclick="cancelarRespuesta()">✕</button>
+            </div>
+            
+            <div class="input-row">
+              <input type="text" id="textoChat" class="chat-input" placeholder="Escribe un mensaje o adjunta una imagen/GIF..." onkeypress="if(event.key === 'Enter') procesarEnvio()">
+              <label for="imagenInput" class="file-upload-btn" title="Adjuntar imagen o GIF">📷 / 🎞️ <span id="fileLabelTxt"></span></label>
+              <input type="file" id="imagenInput" accept="image/*,image/gif" onchange="mostrarNombreArchivo()">
+              <button class="chat-btn" onclick="procesarEnvio()">Enviar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="taskbar">
+    <span class="taskbar-star">✦</span> Los Archivos Públicos (Lucas) <span style="color:#4ab0f0; font-weight:800;">v1.3</span>
+  </div>
+</div>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// LÓGICA DE REPRODUCTOR DE MÚSICA / PLAYLIST
+let playlist = ['cancion1.mp3', 'cancion2.mp3', 'cancion3.mp3'];
+let indiceActual = 0;
+
+function cambiarCancion(archivo, nombreVisual) {
+  const player = document.getElementById('audioPlayer');
+  player.src = archivo;
+  player.play();
+  document.getElementById('nombreCancionActual').innerText = "Reproduciendo: " + nombreVisual;
+  indiceActual = playlist.indexOf(archivo);
+}
+
+function reproducirSiguiente() {
+  indiceActual = (indiceActual + 1) % playlist.length;
+  let siguienteArchivo = playlist[indiceActual];
+  let nombreVisual = "Canción " + (indiceActual + 1);
+  cambiarCancion(siguienteArchivo, nombreVisual);
+}
+
+// SISTEMA DE ACTUALIZACIONES PERSISTENTES
+let actualizacionesDefault = [
+  { ver: "1.3", texto: "¡Integración oficial de la playlist de música (cancion1, 2 y 3) dentro de la sección Extras!" },
+  { ver: "1.21", texto: "Ahora todo esta organizado, y se puso una nueva sección!" },
+  { ver: "1.2", texto: "Todos los archivos de las antiguas y nuevas versiones de esta carpeta fueron movidas a una sola carpeta y cambiado/agregado algunas cosas" },
+  { ver: "1.11", texto: "Actualizado la sección de extras y juegos de computadora y agregado mas cosas" },
+  { ver: "1.1", texto: "Nuevo archivo, el de cursores con su tutorial" },
+  { ver: "1.0", texto: "Lanzamiento de los archivos de lucas" }
+];
+
+function cargarActualizaciones() {
+  let listado = JSON.parse(localStorage.getItem('lucas_actualizaciones')) || actualizacionesDefault;
+  const contenedor = document.getElementById('listaActualizaciones');
+  contenedor.innerHTML = '';
+  listado.forEach(item => {
+    contenedor.innerHTML += `<div class="cl-row"><span class="ver-tag">${item.ver}</span><div class="cl-text">${item.texto}</div></div>`;
+  });
+}
+
+// CREADOR / LOGIN LOGIC
+let esCreador = false;
+
+window.onload = function() {
+  // MANTENER SESIÓN DEL CHAT (Si ya ingresó antes, entra directo al chat)
+  if (localStorage.getItem('lucas_chat_user')) {
+    usuarioActual = localStorage.getItem('lucas_chat_user');
+    avatarActual = localStorage.getItem('lucas_chat_avatar') || null;
+    iniciarChatUI();
+  }
+  
+  // EL ADMIN (LUCAS EL DIOS) SIEMPRE INICIA CERRADO POR SEGURIDAD CADA VEZ QUE SE ENTRA
+  localStorage.removeItem('lucas_es_creador');
+  esCreador = false;
+  document.getElementById('panelAdminExclusivo').style.display = 'none';
+  document.getElementById('btnAbrirLogin').style.display = 'inline-block';
+
+  cargarActualizaciones();
+};
+
+function mostrarLoginCreador() {
+  if(esCreador) return;
+  const area = document.getElementById('areaLoginCreador');
+  area.style.display = area.style.display === 'none' ? 'block' : 'none';
+}
+
+function verificarCreador() {
+  const r1 = document.getElementById('resp1').value.trim();
+  const r2 = document.getElementById('resp2').value.trim();
+  if(r1 !== "" && r2 !== "") {
+    esCreador = true;
+    localStorage.setItem('lucas_es_creador', 'true');
+    
+    // APLICAR FOTO DE PERFIL FotoAdmin.png y NOMBRE "Lucas El Dios"
+    usuarioActual = "Lucas El Dios";
+    avatarActual = "FotoAdmin.png";
+    localStorage.setItem('lucas_chat_user', usuarioActual);
+    localStorage.setItem('lucas_chat_avatar', avatarActual);
+
+    document.getElementById('areaLoginCreador').style.display = 'none';
+    document.getElementById('panelAdminExclusivo').style.display = 'block';
+    document.getElementById('btnAbrirLogin').style.display = 'none';
+    
+    iniciarChatUI();
+    alert("¡Acceso de Creador concedido! Te has logueado como Lucas El Dios con FotoAdmin.png.");
+    cargarMensajes();
+  } else {
+    alert("Respuestas incorrectas. Inténtalo de nuevo.");
+  }
+}
+
+function cerrarSesionCreador() {
+  if(confirm("¿Seguro que deseas cerrar la sesión de creador?")) {
+    esCreador = false;
+    localStorage.removeItem('lucas_es_creador');
+    document.getElementById('panelAdminExclusivo').style.display = 'none';
+    document.getElementById('btnAbrirLogin').style.display = 'inline-block';
+    document.getElementById('resp1').value = '';
+    document.getElementById('resp2').value = '';
+    alert("Has cerrado sesión de administrador.");
+    cargarMensajes();
+  }
+}
+
+// LAS 2 FUNCIONES DEL ADMIN EXCLUSIVO (AÑADIR ACTUALIZACIÓN Y CAMBIAR NOMBRE DE USUARIO)
+function abrirModalActualizacion() {
+  const ver = prompt("Ingresa el número de versión (ej: 1.4):");
+  if (!ver) return;
+  const texto = prompt("Ingresa la descripción de la actualización:");
+  if (!texto) return;
+
+  let listado = JSON.parse(localStorage.getItem('lucas_actualizaciones')) || actualizacionesDefault;
+  listado.unshift({ ver: ver, texto: texto });
+  localStorage.setItem('lucas_actualizaciones', JSON.stringify(listado));
+  cargarActualizaciones();
+  alert("¡Actualización añadida y guardada correctamente!");
+}
+
+function abrirModalCambiarNombre() {
+  const viejoNombre = prompt("Ingresa el nombre del usuario actual que deseas cambiar en el chat:");
+  if (!viejoNombre) return;
+  const nuevoNombre = prompt(`Ingresa el nuevo nombre para "${viejoNombre}":`);
+  if (!nuevoNombre) return;
+
+  let mensajes = JSON.parse(localStorage.getItem('lucas_chat_historial_v4')) || [];
+  let modificado = false;
+  
+  mensajes.forEach(m => {
+    if (m.autor.toLowerCase() === viejoNombre.toLowerCase()) {
+      m.autor = nuevoNombre;
+      modificado = true;
+    }
+  });
+
+  if (modificado) {
+    localStorage.setItem('lucas_chat_historial_v4', JSON.stringify(mensajes));
+    cargarMensajes();
+    alert(`¡Se han actualizado los mensajes de "${viejoNombre}" a "${nuevoNombre}" con éxito!`);
+  } else {
+    alert("No se encontraron mensajes de ese usuario en el historial.");
+  }
+}
+
+// CHAT LOGIC CON AVATAR Y ELIMINACIÓN
+let usuarioActual = null;
+let avatarActual = null;
+let respondiendoA = null;
+let tempAvatarSetup = null;
+
+function previsualizarAvatarSetup(event) {
+  const file = event.target.files[0];
+  if(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      tempAvatarSetup = e.target.result;
+      const img = document.getElementById('setupAvatarImg');
+      img.src = tempAvatarSetup;
+      img.style.display = 'block';
+      document.getElementById('setupAvatarPlaceholder').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function cambiarFotoPerfil(event) {
+  const file = event.target.files[0];
+  if(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      avatarActual = e.target.result;
+      localStorage.setItem('lucas_chat_avatar', avatarActual);
+      actualizarAvatarHeaderUI();
+      cargarMensajes();
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function registrarUsuario() {
+  const input = document.getElementById('usernameInput');
+  const nombre = input.value.trim();
+  if (nombre === "") return alert("Por favor, escribe un nombre.");
+  usuarioActual = nombre;
+  if(tempAvatarSetup) {
+    avatarActual = tempAvatarSetup;
+    localStorage.setItem('lucas_chat_avatar', avatarActual);
+  }
+  localStorage.setItem('lucas_chat_user', nombre);
+  iniciarChatUI();
+}
+
+function cambiarNombre() {
+  localStorage.removeItem('lucas_chat_user');
+  localStorage.removeItem('lucas_chat_avatar');
+  usuarioActual = null;
+  avatarActual = null;
+  tempAvatarSetup = null;
+  document.getElementById('chatMain').style.display = 'none';
+  document.getElementById('chatSetup').style.display = 'flex';
+  document.getElementById('usernameInput').value = '';
+  document.getElementById('setupAvatarImg').style.display = 'none';
+  document.getElementById('setupAvatarPlaceholder').style.display = 'block';
+  document.getElementById('usernameInput').focus();
+}
+
+function iniciarChatUI() {
+  document.getElementById('chatSetup').style.display = 'none';
+  document.getElementById('chatMain').style.display = 'flex';
+  document.getElementById('currentUserNameDisplay').innerText = usuarioActual;
+  actualizarAvatarHeaderUI();
+  cargarMensajes();
+}
+
+function actualizarAvatarHeaderUI() {
+  const headerAvatar = document.getElementById('headerUserAvatar');
+  if(avatarActual) {
+    headerAvatar.innerHTML = `<img src="${avatarActual}">`;
+  } else {
+    headerAvatar.innerText = usuarioActual ? usuarioActual.charAt(0).toUpperCase() : "?";
+  }
+}
+
+function cargarMensajes() {
+  const caja = document.getElementById('cajaMensajes');
+  caja.innerHTML = '';
+  const mensajesGuardados = JSON.parse(localStorage.getItem('lucas_chat_historial_v4')) || [];
+  
+  if (mensajesGuardados.length === 0) {
+    caja.innerHTML = `<div style="text-align:center; color:#999; font-size:0.8rem; margin-top:20px;">No hay mensajes todavía. ¡Sé el primero en escribir!</div>`;
+  } else {
+    mensajesGuardados.forEach(msg => renderizarMensaje(msg));
+  }
+  caja.scrollTop = caja.scrollHeight;
+}
+
+function mostrarNombreArchivo() {
+  const input = document.getElementById('imagenInput');
+  const label = document.getElementById('fileLabelTxt');
+  label.innerText = (input.files && input.files[0]) ? "✓" : "";
+}
+
+function procesarEnvio() {
+  const inputTexto = document.getElementById('textoChat');
+  const inputImg = document.getElementById('imagenInput');
+  const texto = inputTexto.value.trim();
+  
+  if (texto === "" && inputImg.files.length === 0) return;
+
+  if (inputImg.files && inputImg.files[0]) {
+    const file = inputImg.files[0];
+    if (file.size > 2.5 * 1024 * 1024) {
+      alert("El archivo o GIF es demasiado pesado (máximo 2.5 MB). Por favor, elige uno más liviano.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      guardarYEnviar(texto, e.target.result);
+    };
+    reader.onerror = function() {
+      alert("Hubo un error al procesar el archivo o GIF.");
+    };
+    reader.readAsDataURL(file);
+  } else {
+    guardarYEnviar(texto, null);
+  }
+}
+
+function guardarYEnviar(texto, imagenBase64) {
+  const nuevoMensaje = {
+    id: Date.now(),
+    autor: usuarioActual,
+    avatar: avatarActual || null,
+    texto: texto,
+    imagen: imagenBase64,
+    hora: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+    respuestaInfo: respondiendoA 
+  };
+
+  try {
+    const mensajesGuardados = JSON.parse(localStorage.getItem('lucas_chat_historial_v4')) || [];
+    mensajesGuardados.push(nuevoMensaje);
+    if(mensajesGuardados.length > 50) mensajesGuardados.shift(); 
+    
+    localStorage.setItem('lucas_chat_historial_v4', JSON.stringify(mensajesGuardados));
+
+    document.getElementById('textoChat').value = "";
+    document.getElementById('imagenInput').value = "";
+    document.getElementById('fileLabelTxt').innerText = "";
+    cancelarRespuesta();
+    cargarMensajes();
+  } catch (e) {
+    alert("El almacenamiento del navegador está lleno o el GIF excede la capacidad.");
+  }
+}
+
+function renderizarMensaje(msg) {
+  const caja = document.getElementById('cajaMensajes');
+  
+  let avatarHTML = '';
+  if (msg.avatar) {
+    avatarHTML = `<img src="${msg.avatar}">`;
+  } else {
+    avatarHTML = msg.autor ? msg.autor.charAt(0).toUpperCase() : '?';
+  }
+  
+  let htmlRespuesta = msg.respuestaInfo ? `<div class="reply-badge">↪ Respondiendo a <strong>${msg.respuestaInfo.autor}</strong>: "${msg.respuestaInfo.textoCorto}"</div>` : "";
+  let htmlImagen = msg.imagen ? `<img src="${msg.imagen}" class="msg-img" onclick="window.open(this.src)" title="Haz clic para ver en grande">` : "";
+  let htmlEliminar = esCreador ? `<button class="btn-delete-msg" onclick="eliminarMensaje(${msg.id})">Eliminar</button>` : "";
+
+  const div = document.createElement('div');
+  div.className = 'msg-row';
+  div.innerHTML = `
+    <div class="msg-avatar">${avatarHTML}</div>
+    <div class="msg-content">
+      <div class="msg-header">
+        <span class="msg-name">${msg.autor}</span>
+        <span class="msg-time">
+          ${htmlEliminar}
+          <button class="btn-reply" onclick="prepararRespuesta('${msg.autor}', '${msg.texto ? msg.texto.replace(/'/g, "\'") : "Imagen"}')">Responder</button>
+          ${msg.hora}
+        </span>
+      </div>
+      <div class="msg-bubble">
+        ${htmlRespuesta}
+        ${msg.texto ? `<div>${msg.texto}</div>` : ""}
+        ${htmlImagen}
+      </div>
+    </div>
+  `;
+  caja.appendChild(div);
+}
+
+function eliminarMensaje(id) {
+  if(!confirm("¿Seguro que deseas eliminar este mensaje?")) return;
+  let mensajesGuardados = JSON.parse(localStorage.getItem('lucas_chat_historial_v4')) || [];
+  mensajesGuardados = mensajesGuardados.filter(m => m.id !== id);
+  localStorage.setItem('lucas_chat_historial_v4', JSON.stringify(mensajesGuardados));
+  cargarMensajes();
+}
+
+function prepararRespuesta(autor, texto) {
+  let textoCorto = texto.length > 25 ? texto.substring(0, 25) + "..." : texto;
+  respondiendoA = { autor: autor, textoCorto: textoCorto };
+  
+  document.getElementById('replyPreview').style.display = 'flex';
+  document.getElementById('replyText').innerHTML = `Respondiendo a <strong>${autor}</strong>: ${textoCorto}`;
+  document.getElementById('textoChat').focus();
+}
+
+function cancelarRespuesta() {
+  respondiendoA = null;
+  document.getElementById('replyPreview').style.display = 'none';
+}
+</script>
+</body>
+</html>
